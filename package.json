@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "version": "npm i && tsc && npm publish"
+    "version": "npm i && tsc && npm publish --access public"
   },
   "repository": {
     "type": "git",
