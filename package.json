@@ -1,0 +1,29 @@
+{
+  "name": "@liqd-rn/storage",
+  "version": "0.0.1",
+  "description": "",
+  "author": "radixxko",
+  "license": "MIT",
+  "main": "src/index.js",
+  "types": "src/index.d.ts",
+  "files": [ "dist/**/*" ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "version": "npm i && tsc && npm publish"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liqd-rn/storage.git"
+  },
+  "dependencies": {
+    "@liqd-js/fast-object-hash": "^1.0.0"
+  },
+  "peerDependencies": {
+    "rn-secure-storage": "^3.0.1",
+    "react-native-blob-util": "^0.19.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
