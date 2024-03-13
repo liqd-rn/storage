@@ -87,7 +87,7 @@ export default class File
 
         options.format === 'json' && options.type && ( this.data = options.type === 'object' ? {} : []);
 
-        this.filename = ( this.options.encrypted ? RNFetchBlob.fs.dirs.DocumentDir + '/' : '' ) + toBase64URL( path );
+        this.filename = ( this.options.encrypted ? '' : RNFetchBlob.fs.dirs.DocumentDir + '/' ) + toBase64URL( path );
         this.loading = this.load();
     }
 
