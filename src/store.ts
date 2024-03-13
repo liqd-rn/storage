@@ -13,11 +13,14 @@ export type StoreData<T> = T &
 
 export default class Store<T> extends File
 {
-    public static load<T>( path: string, options: StoreOptions ): StoreData<T>
+    //TODO resolve
+    public static init<T>( path: string, options: StoreOptions ): StoreData<T>
     {
-        const dictionary = new Store<T>( path, options );
+        let instance = File.get<Store<T>>( path, options );
 
-        return dictionary.data!;
+        if( !instance ){ instance = new Store<T>( path, options )}
+
+        return instance.data!;
     }
 
     declare protected data: StoreData<T>;

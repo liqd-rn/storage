@@ -13,11 +13,13 @@ export type DictionaryData<T> = Record<string, T> &
 
 export default class Dictionary<T> extends File
 {
-    public static load<T>( path: string, options: DictionaryOptions<T> = {} ): Dictionary<T>
+    public static open<T>( path: string, options: DictionaryOptions<T> = {} ): Dictionary<T>
     {
-        const dictionary = new Dictionary<T>( path, options );
+        let instance = File.get<Dictionary<T>>( path, options );
 
-        return dictionary;
+        if( !instance ){ instance = new Dictionary<T>( path, options )}
+
+        return instance;
     }
 
     declare protected data: DictionaryData<T>;
@@ -25,19 +27,43 @@ export default class Dictionary<T> extends File
 
     protected constructor( path: string, options: DictionaryOptions<T> = {})
     {
-        super( path, { ...options, format: 'json' });   
+        super( path, { ...options, format: 'json', type: 'object' });
 
         Object.defineProperty( this.data, 'save', { enumerable: false, writable: false, value: () => this.save() });
     }
 
     public get( key: string ): T | undefined
     {
-        return this.data[ key ] || this.options.default?.()
+        if( !this.data.hasOwnProperty( key ) && this.options.default )
+        {
+            this.set( key, this.options.default());
+        }
+
+        return this.data[ key ];
     }
 
     public set( key: string, value: T ): Dictionary<T>
     {
         this.data[ key ] = value;
+
+        this.save();
+
+        return this;
+    }   
+
+    public assign( key: string, ...values: Partial<T>[] ): Dictionary<T>
+    {
+        if( !this.data.hasOwnProperty( key ))
+        {
+            this.data[ key ] = this.options.default?.() ?? {} as T;
+        }
+
+        if( typeof this.data[ key ] !== 'object' )
+        {
+            throw new Error( `Dictionary "${ this.path }" key "${ key }" is not an object` );
+        }
+
+        Object.assign( this.data[ key ]!, ...values );
 
         this.save();
 
