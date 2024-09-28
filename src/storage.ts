@@ -12,9 +12,9 @@ export default class Storage
     static get Dictionary(){ return Dictionary }
     static get Store(){ return Store }
 
-    public static async ready()
+    public static get ready()
     {
-        await File[FILES_READY]();
+        return File[FILES_READY]();
     }
 
     /*private static index = new Dictionary<{ created: Date }>('@liqd-rn/storage:index');
