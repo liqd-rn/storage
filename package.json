@@ -1,6 +1,6 @@
 {
   "name": "@liqd-rn/storage",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "",
   "author": "radixxko",
   "license": "MIT",
@@ -24,6 +24,6 @@
     "react-native-blob-util": "^0.19.8"
   },
   "devDependencies": {
-    "typescript": "^5.6.2"
+    "typescript": "^5.7.2"
   }
 }

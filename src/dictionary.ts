@@ -49,7 +49,16 @@ export default class Dictionary<T> extends File
         this.save();
 
         return this;
-    }   
+    }
+
+    public unset( key: string ): Dictionary<T>
+    {
+        delete this.data[ key ];
+
+        this.save();
+
+        return this;
+    }
 
     public assign( key: string, ...values: Partial<T>[] ): Dictionary<T>
     {
